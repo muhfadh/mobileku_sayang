@@ -7,21 +7,33 @@ public class MyWorld extends World
     //semakin besar spawn, semakin lama munculnya
     int spawnSpeed = 100;
     int randomSpawn;
+
+    private Counter score;
+
     public Player mainPlayer = new Player();
     public MyWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(800, 600, 1); 
         addObject(mainPlayer, getWidth()/2, getHeight()/2);
+        score = new Counter();
+        addObject(score,60,20);
+
+        prepare();
     }
-    
+
+    public Counter getScore(){
+        return score;
+    }
+
     public void act()
     {
         //Agar muncul secara berkala dan random
         count++;
         spawnVirus();
+
     }
-    
+
     public void spawnVirus(){
         if(count % spawnSpeed == 0)
         {
@@ -37,5 +49,13 @@ public class MyWorld extends World
                 case 7 : addObject(new Virus(mainPlayer), getWidth(), getHeight()); break;
             }
         }
+    }
+
+    /**
+     * Prepare the world for the start of the program.
+     * That is: create the initial objects and add them to the world.
+     */
+    private void prepare()
+    {
     }
 }

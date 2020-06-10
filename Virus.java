@@ -2,7 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class Virus extends Actor
 {
-    int health = 3;
+    private int health = 3;
     Player player;
     public Virus(Player mainPlayer)
     {
@@ -31,6 +31,9 @@ public class Virus extends Actor
             getWorld().removeObject(projectile);
         }
         if(health ==0){
+            MyWorld world = (MyWorld)getWorld();
+            Counter score = world.getScore();
+            score.tambahScore(10);
             getWorld().removeObject(this);
         }
     }

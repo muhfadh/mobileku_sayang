@@ -1,9 +1,12 @@
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class Player extends Actor
 {
-    int speed = 3;
-    int time = 0;
+    private int speed = 3;
+    private int time = 0;
+    private int totalNyawa = 3;
+    
     public Player(){
         setImage(new GreenfootImage(70,50));
         getImage().setColor(Color.YELLOW);
@@ -18,7 +21,8 @@ public class Player extends Actor
         turnAround();
         moveAround();
         fireProjectile();
-        youLose();
+        terkenaVirus(); 
+        
     }
     
     public void turnAround()
@@ -51,12 +55,23 @@ public class Player extends Actor
         
     }
     
-    public void youLose()
+    public void terkenaVirus()
     {
-        if(isTouching(Virus.class))
+        Actor virus = getOneIntersectingObject(Virus.class);
+        if(virus != null)
         {
-            getWorld().showText("Anda Kalah! - You lasted "+ (time/60)+ " seconds", getWorld().getWidth()/2, getWorld().getHeight()/2);
+            totalNyawa--;
+            getWorld().removeObject(virus);
+            
+        }
+        if(totalNyawa==0){
+            getWorld().showText("Anda Kalah! - Kamu bertahan selama "+ (time/60)+ " detik", getWorld().getWidth()/2, getWorld().getHeight()/2);
+            MyWorld world = (MyWorld)getWorld();
+            Counter score = world.getScore();
+            score.tampilScore();
             Greenfoot.stop();
         }
     }
+ 
+    
 }

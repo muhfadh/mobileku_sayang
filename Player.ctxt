@@ -11,5 +11,5 @@ comment4.target=void\ moveAround()
 comment5.params=
 comment5.target=void\ fireProjectile()
 comment6.params=
-comment6.target=void\ youLose()
+comment6.target=void\ terkenaVirus()
 numComments=7
