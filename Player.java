@@ -6,6 +6,7 @@ public class Player extends Actor
     private int speed = 3;
     private int time = 0;
     private int totalNyawa = 3;
+    boolean kenaVirus = false;
     
     public Player(){
         setImage(new GreenfootImage(70,50));
@@ -60,17 +61,29 @@ public class Player extends Actor
         Actor virus = getOneIntersectingObject(Virus.class);
         if(virus != null)
         {
-            totalNyawa--;
-            getWorld().removeObject(virus);
-            
-        }
-        if(totalNyawa==0){
-            getWorld().showText("Anda Kalah! - Kamu bertahan selama "+ (time/60)+ " detik", getWorld().getWidth()/2, getWorld().getHeight()/2);
             MyWorld world = (MyWorld)getWorld();
             Counter score = world.getScore();
-            score.tampilScore();
-            Greenfoot.stop();
+            NyawaBar nyawaBar = world.getNyawaBar();
+            //getWorld().removeObject(virus);
+            if(kenaVirus == false){
+                nyawaBar.kurangNyawa();
+                kenaVirus = true;
+                if(nyawaBar.getNyawa() <= 0){
+                    getWorld().showText("Anda Kalah! - Kamu bertahan selama "+ (time/60)+ " detik", getWorld().getWidth()/2, getWorld().getHeight()/2);
+                    score.tampilScore();
+                    getWorld().removeObject(virus);
+                    Greenfoot.stop();
+                }
+            }
         }
+        else{
+            kenaVirus = false;
+        }
+        
+            
+            
+            
+        
     }
  
     

@@ -9,21 +9,23 @@ public class MyWorld extends World
     int randomSpawn;
 
     private Counter score;
-
     public Player mainPlayer = new Player();
+    NyawaBar nyawaBar = new NyawaBar();
+    
     public MyWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(800, 600, 1); 
-        addObject(mainPlayer, getWidth()/2, getHeight()/2);
-        score = new Counter();
-        addObject(score,60,20);
-
+        
         prepare();
     }
 
     public Counter getScore(){
         return score;
+    }
+    
+    public NyawaBar getNyawaBar(){
+        return nyawaBar;
     }
 
     public void act()
@@ -50,12 +52,17 @@ public class MyWorld extends World
             }
         }
     }
-
+    
+    
     /**
      * Prepare the world for the start of the program.
      * That is: create the initial objects and add them to the world.
      */
     private void prepare()
     {
+        addObject(mainPlayer, getWidth()/2, getHeight()/2);
+        score = new Counter();
+        addObject(score,60,20);
+        addObject(nyawaBar, 160, 20);
     }
 }
