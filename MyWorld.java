@@ -14,7 +14,7 @@ public class MyWorld extends World
     
     public MyWorld()
     {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
+        
         super(800, 600, 1); 
         
         prepare();
@@ -63,6 +63,6 @@ public class MyWorld extends World
         addObject(mainPlayer, getWidth()/2, getHeight()/2);
         score = new Counter();
         addObject(score,60,20);
-        addObject(nyawaBar, 160, 20);
+        addObject(nyawaBar, 720, 20);
     }
 }

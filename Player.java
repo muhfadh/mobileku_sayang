@@ -59,12 +59,15 @@ public class Player extends Actor
     public void terkenaVirus()
     {
         Actor virus = getOneIntersectingObject(Virus.class);
+        
         if(virus != null)
         {
             MyWorld world = (MyWorld)getWorld();
             Counter score = world.getScore();
             NyawaBar nyawaBar = world.getNyawaBar();
-            //getWorld().removeObject(virus);
+            Ulang ulang = new Ulang();
+            Back back = new Back();
+           
             if(kenaVirus == false){
                 nyawaBar.kurangNyawa();
                 kenaVirus = true;
@@ -72,7 +75,8 @@ public class Player extends Actor
                     getWorld().showText("Anda Kalah! - Kamu bertahan selama "+ (time/60)+ " detik", getWorld().getWidth()/2, getWorld().getHeight()/2);
                     score.tampilScore();
                     getWorld().removeObject(virus);
-                    Greenfoot.stop();
+                    world.addObject(ulang, 400, 365);   
+                    world.addObject(back, 400, 450);
                 }
             }
         }
