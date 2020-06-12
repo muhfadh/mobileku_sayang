@@ -1,4 +1,3 @@
-
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class Player extends Actor
@@ -6,22 +5,76 @@ public class Player extends Actor
     private int speed = 3;
     private int time = 0;
     private int totalNyawa = 3;
-    boolean kenaVirus = false;
+    private boolean kenaVirus = false;
+    private String arahPlayer="up";
+    private boolean onMove=false;
     
     public Player(){
-        setImage(new GreenfootImage(70,50));
-        getImage().setColor(Color.YELLOW);
-        getImage().fillOval(0, 0, 50, 50);
-        getImage().setColor(Color.BLACK);
-        getImage().fillRect(50, 20, 70, 10);
+        setRotation(-90);
+    }
+    
+    public void autoMove(){
+        if(onMove){
+            if(arahPlayer.equalsIgnoreCase("up")){
+                bergerak("up");
+            }
+            
+            if(arahPlayer.equalsIgnoreCase("down")){
+                bergerak("down");
+            }
+        }
+    }
+    
+    public void bergerak(String arah){
+        if(arah.equalsIgnoreCase("up")){
+            move(1);
+        }
+        if(arah.equalsIgnoreCase("down")){
+            move(-1);
+        }
+    }
+    
+    public void virtualKey(String key){
+        if(key.equalsIgnoreCase("up")){
+            onMove=true;
+            arahPlayer = "up";
+            
+        }
+        
+        if(key.equalsIgnoreCase("down")){
+            onMove=true;
+            arahPlayer = "down";
+            
+        }
+        
+        if(key.equalsIgnoreCase("Tleft")){
+           turn(-10);     
+        }
+        
+        if(key.equalsIgnoreCase("Tright")){
+           turn(10);
+        }
+        
+        if(key.equalsIgnoreCase("stop")){
+            onMove=false;
+        }
+        
+        if(key.equalsIgnoreCase("fire")){
+            Projectile projectile = new Projectile();
+            getWorld().addObject(projectile, getX(), getY());
+            projectile.setRotation(getRotation());
+        }
     }
     
     public void act() 
     {
         time++;
-        turnAround();
-        moveAround();
-        fireProjectile();
+        //utk droidfoot
+        autoMove();
+        //ini utk greenfoot
+        //turnAround();
+        //moveAround();
+        //fireProjectile();
         terkenaVirus(); 
         
     }
@@ -30,6 +83,20 @@ public class Player extends Actor
     {
         if(Greenfoot.getMouseInfo() != null)
             turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());
+    }
+    
+    public void kendaliPlayer(){
+        if("up".equals(Greenfoot.getKey())){
+            virtualKey("up");
+        }
+        
+        if("down".equals(Greenfoot.getKey())){
+            virtualKey("down");
+        }
+        
+        if("s".equals(Greenfoot.getKey())){
+            virtualKey("stop");
+        }
     }
     
     //untuk memberikan fungsi gerak pada keyboard
@@ -72,22 +139,24 @@ public class Player extends Actor
                 nyawaBar.kurangNyawa();
                 kenaVirus = true;
                 if(nyawaBar.getNyawa() <= 0){
-                    getWorld().showText("Anda Kalah! - Kamu bertahan selama "+ (time/60)+ " detik", getWorld().getWidth()/2, getWorld().getHeight()/2);
-                    score.tampilScore();
                     getWorld().removeObject(virus);
-                    world.addObject(ulang, 400, 365);   
-                    world.addObject(back, 400, 450);
+                    world.addObject(ulang, 360, world.getHeight()/2);   
+                    world.addObject(back, 460, world.getHeight()/2);
                 }
             }
         }
         else{
             kenaVirus = false;
         }
-        
-            
-            
-            
-        
+   
+    }
+    
+    public boolean getKenaVirus(){
+        return kenaVirus;
+    }
+    
+    public int getTime(){
+        return time;
     }
  
     

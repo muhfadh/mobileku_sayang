@@ -7,9 +7,11 @@ public class MyWorld extends World
     //semakin besar spawn, semakin lama munculnya
     int spawnSpeed = 100;
     int randomSpawn;
-
+    int sisaNyawa;
+    private int totalNyawa = 3;
+    boolean kenaVirus = false;
     private Counter score;
-    public Player mainPlayer = new Player();
+    private Player mainPlayer = new Player();
     NyawaBar nyawaBar = new NyawaBar();
     
     public MyWorld()
@@ -33,6 +35,7 @@ public class MyWorld extends World
         //Agar muncul secara berkala dan random
         count++;
         spawnVirus();
+        gameOver();
 
     }
 
@@ -64,5 +67,32 @@ public class MyWorld extends World
         score = new Counter();
         addObject(score,60,20);
         addObject(nyawaBar, 720, 20);
+        VKdown vKdown = new VKdown();
+        addObject(vKdown,108,530);
+        VKup vKup = new VKup();
+        addObject(vKup,106,400);
+        vKup.setLocation(109,400);
+        VKleft vKleft = new VKleft();
+        addObject(vKleft,39,462);
+        VKright vKright = new VKright();
+        addObject(vKright,177,459);
+        VKfire vKfire = new VKfire();
+        addObject(vKfire,704,468);
     }
+    
+    public Player getPlayer(){
+        return mainPlayer;
+    }
+    
+    public void gameOver(){
+        sisaNyawa = nyawaBar.getNyawa();
+        GreenfootImage gambar = new GreenfootImage("kalah.png");
+        Pictures picture = new Pictures(gambar);
+        
+        if(sisaNyawa <= 0){
+            addObject(picture, getWidth()/2, 90);
+            score.tampilScore();
+        }
+    }
+    
 }
