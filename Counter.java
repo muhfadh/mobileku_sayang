@@ -23,7 +23,5 @@ public class Counter extends Actor
         GreenfootImage skorImg = new GreenfootImage("Score kamu : "+ totalScore,24, Color.WHITE, Color.BLACK);
         Pictures picture = new Pictures(skorImg);
         getWorld().addObject(picture, 400, 180);
-        //setImage(skorImg);
-        //getWorld().showText("Score kamu : "+ totalScore, getWorld().getWidth()/2, getWorld().getHeight()/3);
     }
 }

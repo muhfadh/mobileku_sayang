@@ -71,19 +71,10 @@ public class Player extends Actor
         time++;
         //utk droidfoot
         autoMove();
-        //ini utk greenfoot
-        //turnAround();
-        //moveAround();
-        //fireProjectile();
         terkenaVirus(); 
         
     }
     
-    public void turnAround()
-    {
-        if(Greenfoot.getMouseInfo() != null)
-            turnTowards(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());
-    }
     
     public void kendaliPlayer(){
         if("up".equals(Greenfoot.getKey())){
@@ -98,30 +89,7 @@ public class Player extends Actor
             virtualKey("stop");
         }
     }
-    
-    //untuk memberikan fungsi gerak pada keyboard
-    public void moveAround()
-    {
-        if(Greenfoot.isKeyDown("w"))
-            setLocation(getX(),getY() - speed);
-        if(Greenfoot.isKeyDown("a"))
-            setLocation(getX() - speed, getY());
-        if(Greenfoot.isKeyDown("s"))
-            setLocation(getX(),getY() + speed);
-        if(Greenfoot.isKeyDown("d"))
-            setLocation(getX() + speed, getY());
-    }
-    
-    //untuk membuat fungsi tembak
-    public void fireProjectile()
-    {
-        if(Greenfoot.mousePressed(null)){
-            Projectile projectile = new Projectile();
-            getWorld().addObject(projectile, getX(), getY());
-            projectile.setRotation(getRotation());
-        }
-        
-    }
+  
     
     public void terkenaVirus()
     {
